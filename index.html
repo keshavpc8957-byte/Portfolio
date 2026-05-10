@@ -1,291 +1,394 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keshav Kumar - Software Developer Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="my photo.jpeg" type="image/x-icon">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KESHAV KUMAR | Developer Portfolio</title>
+  <meta name="description" content="Premium futuristic developer portfolio - full-stack engineer, UI/UX designer, and digital innovator." />
+  <meta name="keywords" content="developer, portfolio, full-stack, UI/UX, web design, JavaScript, React" />
+  <meta name="author" content="Keshav Kumar" />
+  <meta property="og:title" content="Keshav | Developer Portfolio" />
+  <meta property="og:description" content="Premium futuristic developer portfolio" />
+  <meta property="og:type" content="website" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Exo+2:wght@300;400;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+  <!-- Chart.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-    <!-- Navbar -->
-<header class="navbar">
-    <div class="navbar-container">
 
-        <!-- Logo -->
-        <div class="navbar-logo">
-            <h1>Keshav Kumar</h1>
-        </div>
+<!-- SCROLL PROGRESS -->
+<div id="scroll-progress"></div>
 
-        <!-- Menu -->
-        <nav class="navbar-menu" id="navMenu">
-            <ul>
-                <li><a href="#home" class="active">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#portfolio">Projects</a></li>
-                <li><a href="#certifications">Certifications</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+<!-- CUSTOM CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<canvas id="cursor-trail"></canvas>
 
-        <!-- Mobile Toggle -->
-        <div class="navbar-toggle" id="navToggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+<!-- PAGE LOADER -->
+<div id="loader">
+  <div class="loader-ring"></div>
+  <div class="loader-text">INITIALIZING PORTFOLIO</div>
+</div>
 
+<!-- EASTER EGG -->
+<div id="easter-egg" onclick="document.getElementById('easter-egg').classList.remove('show')">
+  <div class="egg-text">&#128640; YOU FOUND IT! &#128640;</div>
+  <div style="font-family:var(--font-mono);color:var(--neon-blue);font-size:0.9rem;text-align:center;letter-spacing:0.2em">THE CODE RUNS DEEP<br>TAP TO CLOSE</div>
+</div>
+
+<!-- MUSIC BUTTON -->
+<button id="music-btn" title="Toggle ambient music">&#9834;</button>
+
+<!-- BACK TO TOP -->
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">&uarr;</button>
+
+<!-- ============================================================
+     NAVIGATION
+============================================================ -->
+<nav id="navbar">
+  <div class="nav-logo">KESHAV</div>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#stats">Stats</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#hero" onclick="closeMobileMenu()">Home</a>
+  <a href="#about" onclick="closeMobileMenu()">About</a>
+  <a href="#skills" onclick="closeMobileMenu()">Skills</a>
+  <a href="#projects" onclick="closeMobileMenu()">Projects</a>
+  <a href="#services" onclick="closeMobileMenu()">Services</a>
+  <a href="#stats" onclick="closeMobileMenu()">Stats</a>
+  <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+</div>
+
+<!-- ============================================================
+     HERO SECTION
+============================================================ -->
+<section id="hero">
+  <canvas id="particles-canvas"></canvas>
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-content">
+    <p class="hero-eyebrow">// Welcome to my digital realm</p>
+    <h1 class="hero-name" id="heroName">Keshav Kumar</h1>
+    <div class="hero-typing-container">
+      <span id="typed-text"></span><span class="cursor-blink"></span>
     </div>
-</header>
-
-
-    <!-- Main Content -->
-    <main>
-        <!-- Hero Section -->
-        <section id="home" class="hero">
-            <div class="hero-container">
-                <div class="hero-left">
-                    <h2>Hi, I am <span class="accent">Keshav Kumar</span></h2>
-                    <p class="role">Software Developer</p>
-                    <p class="description">
-                        Passionate about creating stunning, user-centric web experiences. I specialize in modern
-                        frontend technologies to bring ideas to life with clean, efficient code.
-                    </p>
-                    <a href="#contact" class="cta-button">Contact Me</a>
-                    <div class="social-icons">
-                        <a target="_blank"
-                            href="https://www.linkedin.com/in/keshav-kumar-649385370?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-                            class="social-link" data-tooltip="LinkedIn"><i>Linkedin</i></a>
-
-                        <a target="_blank" href="https://www.habitcore-x.online/" class="social-link"
-                            data-tooltip="my website"><i>My Website</i></a>
-                        
-                    </div>
-                </div>
-                <div class="hero-right">
-                    <div class="profile-container">
-                        <img src="my photo.jpeg" alt="Profile Image" class="profile-image">
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- About Section -->
-<section id="about" class="section">
-    <div class="container">
-        <h2>About Me</h2>
-
-        <div class="about-wrapper">
-
-            <!-- Left Side -->
-            <div class="about-text">
-                <h3>BCA Student & Aspiring Software Developer</h3>
-
-                <p>
-                    I am <strong>Keshav Kumar</strong>, currently pursuing <strong>Bachelor of Computer
-                    Applications</strong> from KCNIT College of Education, Banda,
-                    affiliated with Bundelkhand University, Jhansi.
-                </p>
-
-                <p>
-                    I have a strong foundation in C, C++, and Python along with
-                    knowledge of Data Structures, OOP concepts, and web development.
-                    I enjoy solving problems and building practical projects that
-                    strengthen my logical thinking.
-                </p>
-
-                <p>
-                    My goal is to grow as a professional software developer,
-                    continuously learn new technologies, and contribute to
-                    meaningful real world projects.
-                </p>
-
-                <a href="#contact" class="cta-button">Let's Connect</a>
-            </div>
-
-            <!-- Right Side Info Cards -->
-            <div class="about-highlights">
-
-                <div class="highlight-card">
-                    <h4>Education</h4>
-                    <p>Bachelor of Computer Applications</p>
-                </div>
-
-                <div class="highlight-card">
-                    <h4>Core Skills</h4>
-                    <p>C, C++, Python, Web Basics</p>
-                </div>
-
-                <div class="highlight-card">
-                    <h4>Interest</h4>
-                    <p>Software Development & Problem Solving</p>
-                </div>
-
-                <div class="highlight-card">
-                    <h4>Focus</h4>
-                    <p>Building Real World Projects</p>
-                </div>
-
-            </div>
-
-        </div>
+    <p class="hero-tagline">Building tomorrow's digital experiences today. Crafting immersive web solutions that push the boundaries of what's possible.</p>
+    <div class="hero-buttons">
+      <a href="mailto:keshavpc8957@gmail.com" class="btn btn-primary">&#9889; Hire Me</a>
+      <a href="#projects" class="btn btn-secondary">&#9678; View Projects</a>
+      <a href="#contact" class="btn btn-secondary">&rarr; Contact</a>
     </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <span>SCROLL</span>
+    <div class="scroll-line"></div>
+  </div>
 </section>
 
+<!-- ============================================================
+     ABOUT SECTION
+============================================================ -->
+<section id="about" class="grid-bg">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">01 // About</span>
+      <h2 class="section-title">Who I Am</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-image-wrap reveal">
+        <div class="about-image-frame">
+          <div class="about-ring about-ring-3"></div>
+          <div class="about-ring about-ring-2"></div>
+          <div class="about-ring about-ring-1"></div>
+          <div class="about-avatar">K</div>
+        </div>
+      </div>
+      <div class="about-text reveal">
+        <h2>Full-Stack Developer<br>& UI/UX Designer</h2>
+        <p>I'm a passionate software engineer with 1+ years of experience building high-performance web applications and immersive digital experiences. I specialize in creating scalable, elegant solutions that bridge the gap between design and engineering.</p>
+        <p>My philosophy: every pixel should have purpose, every interaction should feel magical, and every line of code should be a work of craft.</p>
+        <div class="about-stats">
+          <div class="astat"><div class="astat-num counter" data-target="10">0</div><div class="astat-label">Projects</div></div>
+          <div class="astat"><div class="astat-num counter" data-target="1">0</div><div class="astat-label">Years Exp</div></div>
+          <div class="astat"><div class="astat-num counter" data-target="">0</div><div class="astat-label">Clients</div></div>
+        </div>
+        <div class="about-badges">
+          <!-- <span class="badge">React</span> -->
+          <!-- <span class="badge">Node.js</span> -->
+          <!-- <span class="badge">TypeScript</span> -->
+          <!-- <span class="badge">Three.js</span> -->
+          <span class="badge">Python</span>
+          <span class="badge">AWS</span>
+          <span class="badge">UI/UX</span>
+          <span class="badge">WebGL</span>
+        </div>
+        <div style="margin-top:24px;display:flex;gap:12px">
+          <a href="#" class="btn btn-primary" style="font-size:0.68rem;padding:12px 24px">&darr; Download CV</a>
+        </div>
+        <!-- Timeline -->
+        <div class="timeline">
+          <div class="timeline-title">// Career Timeline</div>
+          <div class="timeline-item">
+            <div class="timeline-year">2025 &mdash; Present</div>
+            <div class="timeline-role">Frontend Developer</div>
+            <div class="timeline-org"></div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2025 &mdash; 2028</div>
+            <div class="timeline-role">BCA (Bachelor of Computer Applications)</div>
+            <div class="timeline-org">BU Jhansi &mdash; Graduated with Honors</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <!-- Skills Section -->
-        <section id="skills" class="section">
-            <div class="container">
-                <h2>Skills</h2>
-                <div class="skills-grid">
-                    <div class="skill-card">
-                        <h3>HTML & CSS</h3>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 60%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-card">
-                        <h3>JavaScript</h3>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 10%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-card">
-                        <h3>C language</h3>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 60%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-card">
-                        <h3>C++ </h3>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 30%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-card">
-                        <h3>Digital Marketing </h3>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 50%;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+<!-- ============================================================
+     SKILLS SECTION
+============================================================ -->
+<section id="skills">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">02 // Skills</span>
+      <h2 class="section-title">Tech Arsenal</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-category reveal">
+        <div class="skill-cat-icon"><i class="fa-solid fa-atom" aria-hidden="true"></i></div>
+        <div class="skill-cat-title">Frontend</div>
+        <div class="skill-item"><div class="skill-name"><span>HTML</span><span class="skill-pct">95%</span></div><div class="skill-bar"><div class="skill-fill" data-w="95"></div></div></div>
+        <div class="skill-item"><div class="skill-name"><span>javaScript</span><span class="skill-pct">50%</span></div><div class="skill-bar"><div class="skill-fill" data-w="90"></div></div></div>
+        <div class="skill-item"><div class="skill-name"><span>CSS</span><span class="skill-pct">58%</span></div><div class="skill-bar"><div class="skill-fill" data-w="88"></div></div></div>
+        <div class="skill-item"><div class="skill-name"><span>React</span><span class="skill-pct">58%</span></div><div class="skill-bar"><div class="skill-fill" data-w="78"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <!-- Certifications Section -->
-        <section id="certifications" class="section">
-            <div class="container">
-                <h2>Certifications</h2>
+<!-- ============================================================
+     PROJECTS SECTION
+============================================================ -->
+<section id="projects">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">03 // Projects</span>
+      <h2 class="section-title">Selected Work</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="project-filters reveal">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="web">Web Apps</button>
+      <button class="filter-btn" data-filter="mobile">Mobile</button>
+      <button class="filter-btn" data-filter="ai">AI / ML</button>
+      <button class="filter-btn" data-filter="3d">3D / WebGL</button>
+    </div>
+    <div class="projects-grid" id="projectsGrid">
+      <!-- Cards injected by JS -->
+    </div>
+  </div>
+</section>
 
-                <div class="certification-grid">
+<!-- PROJECT MODAL -->
+<div id="project-modal">
+  <div class="modal-box">
+    <div class="modal-close" id="modalClose">&times;</div>
+    <div id="modal-content"></div>
+  </div>
+</div>
 
-                    <!-- Certificate 1 -->
-                    <div class="cert-card">
-                        <!-- <img src="certificate1.jpg" alt="Certificate 1"> -->
-                        <h3>Excel using Chat GPT Certification</h3>
-                        <p>Issued by simplilearn (Microsoft)</p>
-                        <!-- OR Google Drive Link -->
+<!-- ============================================================
+     SERVICES SECTION
+============================================================ -->
+<section id="services">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">04 // Services</span>
+      <h2 class="section-title">What I Offer</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <span class="service-icon"><i class="fa-solid fa-globe" aria-hidden="true"></i></span>
+        <div class="service-title">Web Development</div>
+        <div class="service-desc">Full-stack web applications built with modern frameworks. From concept to deployment with scalability in mind.</div>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-icon"><i class="fa-solid fa-palette" aria-hidden="true"></i></span>
+        <div class="service-title">UI/UX Design</div>
+        <div class="service-desc">User-centered design that converts. From wireframes to high-fidelity prototypes and design systems.</div>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-icon"><i class="fa-solid fa-robot" aria-hidden="true"></i></span>
+        <div class="service-title">AI Integration</div>
+        <div class="service-desc">LLM-powered applications, intelligent automation, and AI-enhanced user experiences.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-                        <a href="https://www.linkedin.com/posts/keshav-kumar-649385370_excel-automation-chatgpt-activity-7428438053842583552-qK23?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFvkUVkBkBelVf_t8GAj4tnJVBlOkdCJNwo"
-                            target="_blank" class="cert-btn">
-                            View Certificate
-                        </a>
-                        <!-- Button to View Image in New Tab -->
-                        <!-- <a href="certificate1.jpg" target="_blank" class="cert-btn">
-                View Certificate
-            </a> -->
+<!-- ============================================================
+     STATS SECTION
+============================================================ -->
+<section id="stats">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">05 // Achievements</span>
+      <h2 class="section-title">By the Numbers</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-item reveal"><div class="stat-num"><span class="counter" data-target="10">0</span><span class="stat-suffix">+</span></div><span class="stat-label">Projects Shipped</span></div>
+      <div class="stat-item reveal"><div class="stat-num"><span class="counter" data-target="5">0</span><span class="stat-suffix">+</span></div><span class="stat-label">Happy Clients</span></div>
+      <div class="stat-item reveal"><div class="stat-num"><span class="counter" data-target="1">0</span><span class="stat-suffix">M+</span></div><span class="stat-label">Users Reached</span></div>
+      <div class="stat-item reveal"><div class="stat-num"><span class="counter" data-target="99">0</span><span class="stat-suffix">%</span></div><span class="stat-label">Client Satisfaction</span></div>
+    </div>
+    <!-- Chart -->
+    <div style="max-width:700px;margin:60px auto 0;background:var(--bg-glass);border:1px solid var(--border-glow);border-radius:12px;padding:32px;backdrop-filter:blur(15px)">
+      <div style="font-family:var(--font-display);font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-blue);text-transform:uppercase;margin-bottom:24px">// Monthly Deliveries</div>
+      <canvas id="statsChart" height="200"></canvas>
+    </div>
+  </div>
+</section>
 
+<!-- ============================================================
+     TERMINAL SECTION
+============================================================ -->
+<section id="terminal-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">06 // Terminal</span>
+      <h2 class="section-title">Interactive Shell</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="terminal-window reveal">
+      <div class="terminal-bar">
+        <div class="t-dot t-red"></div>
+        <div class="t-dot t-yellow"></div>
+        <div class="t-dot t-green"></div>
+        <div class="t-title">Keshav@portfolio:~</div>
+      </div>
+      <div class="terminal-body" id="terminalBody">
+        <div class="t-line"><span class="t-prompt">Keshav@portfolio:~$</span><span class="t-cmd" id="termCmd"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-                    </div>
-                    <div class="cert-card">
-                        <!-- <img src="certificate1.jpg" alt="Certificate 1"> -->
-                        <h3>Digital Marketing training Certification</h3>
-                        <p>Issued by ICEIT</p>
-                        <!-- OR Google Drive Link -->
+<!-- ============================================================
+     TESTIMONIALS SECTION
+============================================================ -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">07 // Testimonials</span>
+      <h2 class="section-title">Client Feedback</h2>
+      <div class="section-line"></div>
+    </div>
+  </div>
+  <div class="testimonials-track">
+    <div class="testimonials-inner" id="testimonialInner">
+      <!-- Injected by JS, doubled for infinite scroll -->
+    </div>
+  </div>
+</section>
 
-                        <a href="https://www.linkedin.com/posts/keshav-kumar-649385370_digitalmarketing-learningjourney-skilldevelopment-activity-7409084505610915840-IWWL?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFvkUVkBkBelVf_t8GAj4tnJVBlOkdCJNwo"
-                            target="_blank" class="cert-btn">
-                            View Certificate
-                        </a>
-                    </div>
+<!-- ============================================================
+     CONTACT SECTION
+============================================================ -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">08 // Contact</span>
+      <h2 class="section-title">Let's Connect</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <h3>Open to Opportunities</h3>
+        <p>Whether you have a project in mind, want to collaborate, or just want to say hello &mdash; my inbox is always open. Let's build something extraordinary together.</p>
+        <div class="contact-card">
+          <div class="contact-icon"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></div>
+          <div class="contact-card-text"><strong>Location</strong><span>San Francisco, CA &mdash; Remote Worldwide</span></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon"><i class="fa-solid fa-envelope" aria-hidden="true"></i></div>
+          <div class="contact-card-text"><strong>Email</strong><span>keshavpc8957@gmail.com</span></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon"><i class="fa-solid fa-phone" aria-hidden="true"></i></div>
+          <div class="contact-card-text"><strong>Phone</strong><span>NA</span></div>
+        </div>
+        <div class="socials">
+          <a href="#" class="social-btn" title="GitHub" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+          <a href="https://www.linkedin.com/in/keshav-kumar-649385370/" class="social-btn" title="LinkedIn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+          <a href="#" class="social-btn" title="Twitter" aria-label="Twitter"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
+          <a href="#" class="social-btn" title="YouTube" aria-label="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
+        </div>
+      </div>
+      <div class="reveal">
+        <form class="contact-form" id="contactForm">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" placeholder="John Doe" required />
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="john@example.com" required />
+          </div>
+          <div class="form-group">
+            <label>Subject</label>
+            <input type="text" placeholder="Project Inquiry" />
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea placeholder="Tell me about your project..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="align-self:flex-start">&rarr; Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
 
-                </div>
-            </div>
-        </section>
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer>
+  <span class="footer-logo">Keshav</span>
+  <div class="footer-tagline">Crafting the future, one pixel at a time.</div>
+  <ul class="footer-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="footer-copy">&copy; <span id="year"></span> Keshav Kumar. All rights reserved. Crafted with &hearts; and &#9749;</div>
+</footer>
 
-        <!-- Portfolio Section -->
-        <section id="portfolio" class="section">
-            <div class="container">
-                <h2>Projects</h2>
-                <div class="portfolio-grid">
-                    <div class="project-card">
-                        <img src="https://via.placeholder.com/400x250?text=Project+1" alt="Project 1">
-                        <div class="overlay">
-                            <h3>Project 1</h3>
-                            <p>A stunning web app built with React.</p>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <img src="https://via.placeholder.com/400x250?text=Project+2" alt="Project 2">
-                        <div class="overlay">
-                            <h3>Project 2</h3>
-                            <p>E-commerce site with modern UI.</p>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <img src="https://via.placeholder.com/400x250?text=Project+3" alt="Project 3">
-                        <div class="overlay">
-                            <h3>Project 3</h3>
-                            <p>Portfolio website like this one.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-         <!-- Services Section -->
-        <section id="services" class="section">
-            <div class="container">
-                <h2>Services</h2>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <h3>Web Development</h3>
-                        <p>Building responsive, modern websites tailored to your needs.</p>
-                    </div>
-                    <div class="service-card">
-                        <h3>Consulting</h3>
-                        <p>Providing expert advice on frontend best practices.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="section">
-            <div class="container">
-                <h2>Contact</h2>
-                <form class="contact-form">
-                    <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Your Email" required>
-                    <textarea name="message" placeholder="Your Message" required></textarea>
-                    <button type="submit" class="cta-button">Send Message</button>
-                </form>
-            </div>
-        </section>
-    </main>
-
-    <script src="script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-    <script>
-        (function () {
-            emailjs.init("bDmATeys6JC9FxxR_");
-        })();
-    </script>
-
+<script src="script.js"></script>
 </body>
-
 </html>
-
