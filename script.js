@@ -101,7 +101,7 @@ const portfolioData = {
     {
       period: "2025 – Present",
       role:   "Junior Web Developer",
-      org:    "Digital Agency Co., New York",
+      org:    "NA",
       desc:   "Developed landing pages and WordPress sites for 10+ clients across various industries.",
     },
   ],
@@ -111,8 +111,8 @@ const portfolioData = {
     {
       period: "2025 – 2028",
       role:   "BCA (Bachelor of Computer Applications) ",
-      org:    "University of California, Berkeley",
-      desc:   "Graduated with Honors. Focus on algorithms, software engineering, and human-computer interaction.",
+      org:    "Bundelkhand University (BU Jhansi)",
+      desc:   "Focus on algorithms, software engineering, and human-computer interaction.",
     },
   ],
 
